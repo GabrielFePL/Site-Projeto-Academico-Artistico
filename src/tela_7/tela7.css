@@ -1,0 +1,90 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+.tela7 {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  place-items: center;
+  background: #000;
+}
+
+/* O contêiner acompanha a proporção original da imagem em qualquer viewport. */
+.cozinha-interativa {
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100vw, 70.7031vh);
+  inline-size: min(100vw, 70.7031svh);
+  aspect-ratio: 1448 / 2048;
+  margin: 0;
+}
+
+.cozinha-interativa__imagem {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Quadro pequeno na parede direita → tela 6. */
+.hotspot--quadro {
+  inset-inline-start: 66.76%;
+  inset-block-start: 17.04%;
+  inline-size: 9.08%;
+  block-size: 8.15%;
+}
+
+/* Janela com estrelas → tela 1. */
+.hotspot--janela {
+  inset-inline-start: 14.38%;
+  inset-block-start: 15.31%;
+  inline-size: 22%;
+  block-size: 20.99%;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #fff;
+  outline-offset: max(2px, 0.2vw);
+}
+
+.hotspot.is-pressed {
+  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
+  outline-offset: 1px;
+}
+
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #fff;
+  background: rgb(255 255 255 / 20%);
+}

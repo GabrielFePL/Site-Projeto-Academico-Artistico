@@ -1,0 +1,107 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+.tela1 {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  place-items: center;
+  background: #000;
+}
+
+/*
+ * O GIF ocupa 97,9% da altura do slide original (528,57 de 540 px).
+ * Em telas estreitas, a largura disponÃ­vel passa a controlar o tamanho.
+ */
+.cidade-interativa {
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100vw, 97.9vh);
+  inline-size: min(100vw, 97.9svh);
+  aspect-ratio: 1;
+  margin: 0;
+}
+
+.cidade-interativa__imagem {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Janela branca do prÃ©dio inferior direito â†’ tela 2. */
+.hotspot--escadaria {
+  inset-inline-start: 63.55%;
+  inset-block-start: 77.91%;
+  inline-size: 5.19%;
+  block-size: 6.63%;
+}
+
+/* Janela vertical estreita do prÃ©dio central â†’ tela 3. */
+.hotspot--espiral {
+  inset-inline-start: 46.22%;
+  inset-block-start: 54.92%;
+  inline-size: 2.27%;
+  block-size: 6.63%;
+}
+
+/* Painel superior da torre direita â†’ tela 6. */
+.hotspot--cozinha {
+  inset-inline-start: 74.22%;
+  inset-block-start: 44.07%;
+  inline-size: 6.05%;
+  block-size: 11.86%;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #ff355e;
+  outline-offset: max(2px, 0.2vw);
+}
+
+.hotspot.is-pressed {
+  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
+  outline-offset: 1px;
+}
+
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #ff355e;
+  background: rgb(255 53 94 / 20%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot {
+    scroll-behavior: auto;
+  }
+}

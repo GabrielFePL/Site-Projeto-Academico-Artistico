@@ -1,0 +1,93 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+.tela3 {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  place-items: center;
+  background: #000;
+}
+
+/*
+ * O contÃªiner acompanha a proporÃ§Ã£o da imagem original. A imagem inteira
+ * permanece visÃ­vel, sem recorte ou distorÃ§Ã£o, em qualquer viewport.
+ */
+.espiral-interativa {
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100vw, 75vh);
+  inline-size: min(100vw, 75svh);
+  aspect-ratio: 960 / 1280;
+  margin: 0;
+}
+
+.espiral-interativa__imagem {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Bloco retangular Ã  esquerda da espiral â†’ tela 1. */
+.hotspot--cidade {
+  inset-inline-start: 17.01%;
+  inset-block-start: 48.74%;
+  inline-size: 11.58%;
+  block-size: 13.72%;
+}
+
+/* Centro da espiral â†’ tela 4. */
+.hotspot--centro {
+  inset-inline-start: 36.06%;
+  inset-block-start: 44.26%;
+  inline-size: 19.42%;
+  block-size: 19.05%;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #fff;
+  outline-offset: max(2px, 0.2vw);
+}
+
+.hotspot.is-pressed {
+  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
+  outline-offset: 1px;
+}
+
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #fff;
+  background: rgb(255 255 255 / 20%);
+}

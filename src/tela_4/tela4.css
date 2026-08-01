@@ -1,0 +1,85 @@
+:root {
+  color-scheme: dark;
+  background: #4b203a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #4b203a;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+.tela4 {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  place-items: center;
+  background: #4b203a;
+}
+
+/*
+ * O contêiner mantém a proporção da fotografia original. A imagem permanece
+ * inteira, sem recorte ou distorção, em qualquer proporção de viewport.
+ */
+.objeto-interativo {
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100vw, 75vh);
+  inline-size: min(100vw, 75svh);
+  aspect-ratio: 1536 / 2048;
+  margin: 0;
+}
+
+.objeto-interativo__imagem {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Segmento superior interno do objeto espiral → tela 1. */
+.hotspot--cidade {
+  inset-inline-start: 41.66%;
+  inset-block-start: 27.45%;
+  inline-size: 10.46%;
+  block-size: 12.6%;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #fff;
+  outline-offset: max(2px, 0.2vw);
+}
+
+.hotspot.is-pressed {
+  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
+  outline-offset: 1px;
+}
+
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #fff;
+  background: rgb(255 255 255 / 20%);
+}

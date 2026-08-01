@@ -1,0 +1,90 @@
+:root {
+  color-scheme: dark;
+  background: #131315;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #131315;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+}
+
+.tela5 {
+  display: grid;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  place-items: center;
+  background: #131315;
+}
+
+/* O contêiner acompanha a proporção da imagem original em qualquer viewport. */
+.rosto-interativo {
+  position: relative;
+  isolation: isolate;
+  inline-size: min(100vw, 89.3701vh);
+  inline-size: min(100vw, 89.3701svh);
+  aspect-ratio: 908 / 1016;
+  margin: 0;
+}
+
+.rosto-interativo__imagem {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Nariz do rosto → tela 1. */
+.hotspot--nariz {
+  inset-inline-start: 54.42%;
+  inset-block-start: 52.1%;
+  inline-size: 11.88%;
+  block-size: 15.31%;
+}
+
+/* Boca do rosto → tela 2. */
+.hotspot--boca {
+  inset-inline-start: 52.84%;
+  inset-block-start: 70.03%;
+  inline-size: 15.04%;
+  block-size: 7.85%;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #fff;
+  outline-offset: max(2px, 0.2vw);
+}
+
+.hotspot.is-pressed {
+  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
+  outline-offset: 1px;
+}
+
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #fff;
+  background: rgb(255 255 255 / 20%);
+}
