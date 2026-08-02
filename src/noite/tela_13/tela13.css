@@ -1,0 +1,81 @@
+:root {
+  color-scheme: dark;
+  background: #586d77;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #586d77;
+}
+
+body {
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+}
+
+/*
+ * A própria imagem ocupa toda a viewport. object-fit: contain faz o conteúdo
+ * visual usar a maior área possível sem recorte, deformação ou perda da
+ * proporção original. Nenhum contêiner controla o tamanho deste elemento.
+ */
+.imagem-principal {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  inline-size: 100vw;
+  block-size: 100vh;
+  block-size: 100dvh;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hotspot {
+  position: fixed;
+  display: block;
+  visibility: hidden;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hotspot--regiao-direita {
+  z-index: 1;
+}
+
+.hotspot--personagem {
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.hotspot--elipse-central {
+  z-index: 3;
+  border-radius: 50%;
+}
+
+html[data-hotspots-ready="true"] .hotspot {
+  visibility: visible;
+}
+
+.hotspot:focus-visible {
+  outline: max(2px, 0.25vw) solid #ff355e;
+  outline-offset: max(2px, 0.2vw);
+}
+
+/* Acrescente ?debug=1 ao endereço para visualizar as áreas clicáveis. */
+html[data-debug="true"] .hotspot {
+  outline: 2px solid #ff355e;
+  background: rgb(255 53 94 / 20%);
+}
