@@ -1,20 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projeto de Artes</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Artes</title>
 
-  <meta
-    http-equiv="refresh"
-    content="0; url=/src/noite/tela_1/tela1.html"
-  >
-</head>
-<body>
-  <p>
-    <a href="/src/noite/tela_1/tela1.html">
-      Iniciar experiência
-    </a>
-  </p>
-</body>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #000;
+      }
+
+      #conteudo-fluxo {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <iframe
+      id="conteudo-fluxo"
+      title="Fluxo interativo do projeto de Artes"
+      allowfullscreen
+    ></iframe>
+
+    <noscript>
+      Este site precisa do JavaScript ativado para selecionar o fluxo de
+      navegação conforme o horário.
+    </noscript>
+
+    <script>
+      (() => {
+        const CAMINHOS = {
+          manha: "src/manha/tela_1/tela1.html",
+          tarde: "src/tarde/tela_1/tela1.html",
+          noite: "src/noite/tela_1/tela1.html"
+        };
+
+        const iframe = document.querySelector("#conteudo-fluxo");
+        let fluxoAtual = null;
+        let temporizadorTroca = null;
+
+        function identificarFluxo(data = new Date()) {
+          const hora = data.getHours();
+
+          if (hora >= 6 && hora < 13) {
+            return "manha";
+          }
+
+          if (hora >= 13 && hora < 18) {
+            return "tarde";
+          }
+
+          return "noite";
+        }
+
+        function calcularProximaTroca(data = new Date()) {
+          const proximaTroca = new Date(data);
+          const hora = data.getHours();
+
+          if (hora < 6) {
+            proximaTroca.setHours(6, 0, 0, 0);
+          } else if (hora < 13) {
+            proximaTroca.setHours(13, 0, 0, 0);
+          } else if (hora < 18) {
+            proximaTroca.setHours(18, 0, 0, 0);
+          } else {
+            proximaTroca.setDate(proximaTroca.getDate() + 1);
+            proximaTroca.setHours(6, 0, 0, 0);
+          }
+
+          return proximaTroca;
+        }
+
+        function agendarProximaTroca() {
+          window.clearTimeout(temporizadorTroca);
+
+          const agora = new Date();
+          const proximaTroca = calcularProximaTroca(agora);
+          const tempoAteTroca = proximaTroca.getTime() - agora.getTime();
+
+          temporizadorTroca = window.setTimeout(
+            atualizarFluxo,
+            tempoAteTroca + 100
+          );
+        }
+
+        function atualizarFluxo() {
+          const novoFluxo = identificarFluxo();
+
+          if (novoFluxo !== fluxoAtual) {
+            iframe.src = CAMINHOS[novoFluxo];
+            iframe.title = `Fluxo ${novoFluxo} do projeto de Artes`;
+            fluxoAtual = novoFluxo;
+          }
+
+          agendarProximaTroca();
+        }
+
+        // Corrige o fluxo ao voltar para uma aba que ficou suspensa pelo navegador.
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) {
+            atualizarFluxo();
+          }
+        });
+
+        window.addEventListener("pageshow", atualizarFluxo);
+        atualizarFluxo();
+      })();
+    </script>
+  </body>
 </html>
