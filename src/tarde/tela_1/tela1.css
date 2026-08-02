@@ -90,11 +90,6 @@ body {
   outline-offset: max(2px, 0.2vw);
 }
 
-.hotspot.is-pressed {
-  outline: max(1px, 0.15vw) solid rgb(255 255 255 / 75%);
-  outline-offset: 1px;
-}
-
 html[data-debug="true"] .hotspot {
   outline: 2px solid #ff355e;
   background: rgb(255 53 94 / 20%);
